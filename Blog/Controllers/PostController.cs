@@ -17,8 +17,7 @@ namespace Blog.Controllers
                 new Post { Titulo = "Homem Aranha 3", Resumo = "Um homem que também é aranha", Categoria = "Heróis" },
                 new Post { Titulo = "Filme do Adam Sandler", Resumo = "Pode ser qualquer um", Categoria = "Pastelão" }
             };
-            ViewBag.Posts = listaDePosts;
-            return View();
+            return View(listaDePosts);
         }
     }
 }
