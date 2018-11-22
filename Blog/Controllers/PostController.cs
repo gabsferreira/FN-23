@@ -31,6 +31,7 @@ namespace Blog.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Adiciona (Post p)
         {
             this.listaDePosts.Add(p);
