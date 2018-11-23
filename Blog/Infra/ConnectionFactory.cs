@@ -20,6 +20,7 @@ namespace Blog.Infra
 
             string stringConexao = configuration.GetConnectionString("Blog");
             SqlConnection conexao = new SqlConnection(stringConexao);
+            conexao.Open();
             return conexao;
         }
     }

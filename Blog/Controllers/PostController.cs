@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.DAO;
 using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,9 @@ namespace Blog.Controllers
 
         public IActionResult Index()
         {
-            return View(listaDePosts);
+            PostDAO dao = new PostDAO();
+            IList<Post> lista = dao.Lista();
+            return View(lista);
         }
 
         public IActionResult Novo()
@@ -32,7 +35,7 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adiciona (Post p)
+        public IActionResult Adiciona(Post p)
         {
             this.listaDePosts.Add(p);
             return View("Index", this.listaDePosts);
