@@ -26,10 +26,22 @@ namespace Blog.DAO
                         Id = Convert.ToInt32(leitor["id"]),
                         Titulo = Convert.ToString(leitor["titulo"]),
                         Resumo = Convert.ToString(leitor["resumo"]),
-                        Categoria = Convert.ToString(leitor["categoria"]) };
+                        Categoria = Convert.ToString(leitor["categoria"])
+                    };
                     lista.Add(post);
                 }
                 return lista;
+            }
+        }
+
+        public void Adiciona(Post post)
+        {
+            using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
+            {
+                SqlCommand comando = conexao.CreateCommand();
+                comando.CommandText = "insert	into	Posts	(Titulo,	Resumo,	Categoria)	" +
+                    "values	('" + post.Titulo + "','" + post.Resumo + "','" + post.Categoria + "')";
+                comando.ExecuteNonQuery();
             }
         }
     }

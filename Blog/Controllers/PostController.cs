@@ -37,8 +37,9 @@ namespace Blog.Controllers
         [HttpPost]
         public IActionResult Adiciona(Post p)
         {
-            this.listaDePosts.Add(p);
-            return View("Index", this.listaDePosts);
+            PostDAO dao = new PostDAO();
+            dao.Adiciona(p);
+            return RedirectToAction("Index");
         }
     }
 }
