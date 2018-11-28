@@ -28,5 +28,15 @@ namespace Blog.DAO
                 contexto.SaveChanges();
             }
         }
+
+        public IList<Post> FiltraPorCategoria(string categoria)
+        {
+            using (BlogContext contexto = new BlogContext())
+            {
+                var posts = contexto.Posts.Where(p => p.Categoria.Contains(categoria));
+
+                return posts.ToList();
+            }
+        }
     }
 }
