@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model Blog.Models.Post
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Visualiza</title>
+</head>
+<body>
+    <form action="/post/editapost" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <label>
+            Titulo: <input name="titulo" value="@Model.Titulo" />
+        </label>
+        <label>
+            Resumo: <input name="resumo" value="@Model.Resumo" />
+        </label>
+        <label>
+            Categoria: <input name="categoria" value="@Model.Categoria" />
+        </label>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

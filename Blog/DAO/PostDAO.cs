@@ -1,5 +1,6 @@
 ﻿using Blog.Infra;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace Blog.DAO
 {
     public class PostDAO
-    {
+    { 
         public IList<Post> Lista()
         {
             using (BlogContext contexto = new BlogContext())
@@ -36,6 +37,33 @@ namespace Blog.DAO
                 var posts = contexto.Posts.Where(p => p.Categoria.Contains(categoria));
 
                 return posts.ToList();
+            }
+        }
+
+        public void Remove(int id)
+        {
+            using (BlogContext contexto = new BlogContext())
+            {
+                var post = contexto.Posts.Find(id);
+                contexto.Remove(post);
+                contexto.SaveChanges();
+            }
+        }
+
+        public Post BuscaPorId(int id)
+        {
+            using (BlogContext contexto = new BlogContext())
+            {
+                return contexto.Posts.Find(id);
+            }
+        }
+
+        public void Atualiza(Post p)
+        {
+            using (BlogContext contexto = new BlogContext())
+            {
+                contexto.Entry(p).State = EntityState.Modified;
+                contexto.SaveChanges();
             }
         }
     }
