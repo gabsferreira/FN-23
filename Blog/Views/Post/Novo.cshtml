@@ -15,11 +15,11 @@
 <body>
     <form action="/post/adiciona" method="post">
         <label>
-            Titulo: <input name="titulo" value="@Model.Titulo" />
+            Titulo: <input name="titulo" maxlength="50"	required value="@Model.Titulo" />
         </label>
         @Html.ValidationMessage("Titulo")
         <label>
-            Resumo: <input name="resumo" value="@Model.Resumo" />
+            Resumo: <input name="resumo" required value="@Model.Resumo" />
         </label>
         @Html.ValidationMessage("Resumo")
         <label>
