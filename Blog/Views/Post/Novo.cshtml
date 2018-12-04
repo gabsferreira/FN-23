@@ -3,6 +3,8 @@
     Layout = null;
 }
 
+@model Blog.Models.Post
+
 <!DOCTYPE html>
 
 <html>
@@ -13,14 +15,17 @@
 <body>
     <form action="/post/adiciona" method="post">
         <label>
-            Titulo: <input name="titulo" />
+            Titulo: <input name="titulo" value="@Model.Titulo" />
         </label>
+        @Html.ValidationMessage("Titulo")
         <label>
-            Resumo: <input name="resumo" />
+            Resumo: <input name="resumo" value="@Model.Resumo" />
         </label>
+        @Html.ValidationMessage("Resumo")
         <label>
-            Categoria: <input name="categoria" />
+            Categoria: <input name="categoria" value="@Model.Categoria" />
         </label>
+        @Html.ValidationMessage("Categoria")
         <button type="submit">Salvar</button>
     </form>
 </body>

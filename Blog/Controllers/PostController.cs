@@ -10,18 +10,6 @@ namespace Blog.Controllers
 {
     public class PostController : Controller
     {
-        private IList<Post> listaDePosts;
-
-        public PostController()
-        {
-            this.listaDePosts = new List<Post>
-            {
-                new Post { Titulo = "A volta dos que não foram", Resumo = "Uns foram e voltaram, outros não", Categoria = "Épico" },
-                new Post { Titulo = "Homem Aranha 3", Resumo = "Um homem que também é aranha", Categoria = "Heróis" },
-                new Post { Titulo = "Filme do Adam Sandler", Resumo = "Pode ser qualquer um", Categoria = "Pastelão" }
-            };
-        }
-
         public IActionResult Index()
         {
             PostDAO dao = new PostDAO();
@@ -31,15 +19,23 @@ namespace Blog.Controllers
 
         public IActionResult Novo()
         {
-            return View();
+            Post p = new Post();
+            return View(p);
         }
         
         [HttpPost]
         public IActionResult Adiciona(Post p)
         {
-            PostDAO dao = new PostDAO();
-            dao.Adiciona(p);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                PostDAO dao = new PostDAO();
+                dao.Adiciona(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Novo", p);
+            }
         }
 
         public IActionResult RemovePost (int id)
@@ -65,9 +61,16 @@ namespace Blog.Controllers
 
         public IActionResult EditaPost (Post p)
         {
-            PostDAO dao = new PostDAO();
-            dao.Atualiza(p);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                PostDAO dao = new PostDAO();
+                dao.Atualiza(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Visualiza", p);
+            }
         }
 
         public IActionResult PublicaPost(int id)
